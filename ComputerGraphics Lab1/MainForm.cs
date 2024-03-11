@@ -202,8 +202,8 @@ namespace ComputerGraphics_Lab1
 
         private void светящиесяКраяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new GlowingEdgesFilter();
-            backgroundWorker1.RunWorkerAsync(filter);
+            //Filters filter = new GlowingEdgesFilter();
+            //backgroundWorker1.RunWorkerAsync(filter);
         }
     }
 }
