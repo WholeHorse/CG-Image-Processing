@@ -21,7 +21,7 @@ namespace ComputerGraphics_Lab1
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-
+            
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -146,6 +146,63 @@ namespace ComputerGraphics_Lab1
         private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new SepiaFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void фильтрСобеляToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new SobelFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void добавитьРезкостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new SharpenFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void тиснениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new EmbossingFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            double centerX = 200;
+            double centerY = 200;
+            double angle = 45;
+            Filters filter = new RotateFilter(centerX, centerY, angle);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void волныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new WavesFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void переносToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new TranspositionFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void фильтрЩарраToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new ScharrFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void стеклоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GlassFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void светящиесяКраяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GlowingEdgesFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
     }
