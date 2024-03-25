@@ -40,9 +40,9 @@ namespace ComputerGraphics_Lab1
                 }
             }
 
-            resultR = Clamp((int)(resultR + shift + 255) / 2, 0, 255);
-            resultG = Clamp((int)(resultG + shift + 255) / 2, 0, 255);
-            resultB = Clamp((int)(resultB + shift + 255) / 2, 0, 255);
+            resultR = Clamp((int)(resultR + shift) / 2, 0, 255);
+            resultG = Clamp((int)(resultG + shift) / 2, 0, 255);
+            resultB = Clamp((int)(resultB + shift) / 2, 0, 255);
 
             int intensity = Clamp((int)(0.299 * resultR + 0.587 * resultG + 0.114 * resultB), 0, 255);
             Color resultColor = Color.FromArgb(intensity, intensity, intensity);

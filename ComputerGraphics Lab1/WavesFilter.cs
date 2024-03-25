@@ -11,19 +11,19 @@ namespace ComputerGraphics_Lab1
     {
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            int newX1 = (int)(x + 20 * Math.Sin(2 * Math.PI * y / 60));
-            int newY1 = y;
+            //int newX1 = (int)(x + 20 * Math.Sin(2 * Math.PI * y / 60));
+            //int newY1 = y;
 
             int newX2 = (int)(x + 20 * Math.Sin(2 * Math.PI * x / 30));
             int newY2 = y;
 
-            Color color1 = GetPixelSafe(sourceImage, newX1, newY1);
+            //Color color1 = GetPixelSafe(sourceImage, newX1, newY1);
             Color color2 = GetPixelSafe(sourceImage, newX2, newY2);
 
             // Среднее значение цветов для волнового эффекта
-            int newR = (color1.R + color2.R) / 2;
-            int newG = (color1.G + color2.G) / 2;
-            int newB = (color1.B + color2.B) / 2;
+            int newR = color2.R;
+            int newG = color2.G;
+            int newB = color2.B;
 
             return Color.FromArgb(Clamp(newR, 0, 255), Clamp(newG, 0, 255), Clamp(newB, 0, 255));
         }
@@ -33,11 +33,6 @@ namespace ComputerGraphics_Lab1
             x = Clamp(x, 0, image.Width - 1);
             y = Clamp(y, 0, image.Height - 1);
             return image.GetPixel(x, y);
-        }
-
-        private int Clamp(int value, int min, int max)
-        {
-            return Math.Max(min, Math.Min(max, value));
         }
     }
 }

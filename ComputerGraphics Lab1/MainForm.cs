@@ -112,9 +112,25 @@ namespace ComputerGraphics_Lab1
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Bitmap newImage = ((Filters)e.Argument).processImage(image, backgroundWorker1);
+            /*Bitmap newImage = ((Filters)e.Argument).processImage(image, backgroundWorker1);
             if (backgroundWorker1.CancellationPending != true)
-                image = newImage;
+                image = newImage;*/
+            Bitmap newImage = image;
+            Filters[] filters = e.Argument as Filters[];
+            if (filters == null)
+            {
+                filters = new Filters[] { e.Argument as Filters };
+            }
+            foreach (Filters filter in filters)
+            {
+                newImage = filter.processImage(newImage, backgroundWorker1);
+                if (backgroundWorker1.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            image = newImage;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -202,8 +218,115 @@ namespace ComputerGraphics_Lab1
 
         private void светящиесяКраяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Filters filter = new GlowingEdgesFilter();
-            //backgroundWorker1.RunWorkerAsync(filter);
+            Filters[] filters = new Filters[] { new MedianFilter(), new SobelFilter(), new MaximumFilter() };
+            backgroundWorker1.RunWorkerAsync(filters);
+        }
+
+        private void серыиМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GrayWorldFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void идеальныиОтражательToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new PerfectReflectorFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Color refColor = Color.FromArgb(128, 128, 0);
+            Filters filter = new ReferenceColorCorrectionFilter(refColor);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void линейноеРастяжениеГистограммыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new HistogramStretchingFilter(image);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void dilationрасширениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            Filters filter = new DilationFilter(structElem);
+            backgroundWorker1.RunWorkerAsync(filter);
+
+        }
+
+        private void erosionэрозияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            Filters filter = new ErosionFilter(structElem);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            Filters filter = new OpeningFilter(structElem);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void closingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            Filters[] filters = new Filters[] { new DilationFilter(structElem), new ErosionFilter(structElem) };
+            backgroundWorker1.RunWorkerAsync(filters);
+        }
+
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            
+        }
+
+        private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            
+        }
+
+        private void gradientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] structElem = new bool[,]
+            {
+                { true, true, true },
+                { true, true, true },
+                { true, true, true }
+            };
+            
         }
     }
 }

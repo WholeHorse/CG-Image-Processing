@@ -47,14 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinarizationFilter.cs" />
+    <Compile Include="BlackHatFilter.cs" />
     <Compile Include="BlurFilter.cs" />
     <Compile Include="BrightFilter.cs" />
+    <Compile Include="ClosingFilter.cs" />
+    <Compile Include="DilationFilter.cs" />
     <Compile Include="EmbossingFilter.cs" />
+    <Compile Include="ErosionFilter.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="GaussianFilter.cs" />
     <Compile Include="GlassFilter.cs" />
-    <Compile Include="GlowingEdgesFilter.cs" />
     <Compile Include="GrayscaleFilter.cs" />
+    <Compile Include="GrayWorldFilter.cs" />
+    <Compile Include="HistogramStretchingFilter.cs" />
     <Compile Include="InvertFilter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -65,14 +70,20 @@
     <Compile Include="MatrixFilter.cs" />
     <Compile Include="MaximumFilter.cs" />
     <Compile Include="MedianFilter.cs" />
+    <Compile Include="MorphologicalGradientFilter.cs" />
     <Compile Include="MotionBlurFilter.cs" />
+    <Compile Include="OpeningFilter.cs" />
+    <Compile Include="PerfectReflectorFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceColorCorrectionFilter.cs" />
     <Compile Include="RotateFilter.cs" />
     <Compile Include="ScharrFilter.cs" />
     <Compile Include="SepiaFilter.cs" />
     <Compile Include="SharpenFilter.cs" />
     <Compile Include="SobelFilter.cs" />
+    <Compile Include="SubstractionFilter.cs" />
+    <Compile Include="TopHatFilter.cs" />
     <Compile Include="TranspositionFilter.cs" />
     <Compile Include="WavesFilter.cs" />
     <EmbeddedResource Include="MainForm.resx">
