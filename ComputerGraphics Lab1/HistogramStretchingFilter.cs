@@ -9,19 +9,21 @@ namespace ComputerGraphics_Lab1
 {
     internal class HistogramStretchingFilter : Filters
     {
-        private int minIntensity = 255;
-        private int maxIntensity = 0;
+        private int minR = 255, maxR = 0, minG = 255, maxG = 0, minB = 255, maxB = 0;
 
-        public HistogramStretchingFilter(Bitmap image)
+        public HistogramStretchingFilter(Bitmap sourceImage)
         {
-            // Calculate the minimum and maximum intensity in the image
-            for (int i = 0; i < image.Width; i++)
+            for (int i = 0; i < sourceImage.Width; i++)
             {
-                for (int j = 0; j < image.Height; j++)
+                for (int j = 0; j < sourceImage.Height; j++)
                 {
-                    int intensity = (int)((image.GetPixel(i, j).R + image.GetPixel(i, j).G + image.GetPixel(i, j).B) / 3);
-                    minIntensity = Math.Min(minIntensity, intensity);
-                    maxIntensity = Math.Max(maxIntensity, intensity);
+                    Color pixel = sourceImage.GetPixel(i, j);
+                    minR = Math.Min(minR, pixel.R);
+                    maxR = Math.Max(maxR, pixel.R);
+                    minG = Math.Min(minG, pixel.G);
+                    maxG = Math.Max(maxG, pixel.G);
+                    minB = Math.Min(minB, pixel.B);
+                    maxB = Math.Max(maxB, pixel.B);
                 }
             }
         }
@@ -29,13 +31,10 @@ namespace ComputerGraphics_Lab1
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
-
-            int intensity = (int)((sourceColor.R + sourceColor.G + sourceColor.B) / 3);
-
-            int newIntensity = (int)(((float)(intensity - minIntensity) / (maxIntensity - minIntensity)) * 255);
-
-            Color resultColor = Color.FromArgb(newIntensity, newIntensity, newIntensity);
-            return resultColor;
+            int newR = Clamp((sourceColor.R - minR) * 255 / (maxR - minR), 0, 255);
+            int newG = Clamp((sourceColor.G - minG) * 255 / (maxG - minG), 0, 255);
+            int newB = Clamp((sourceColor.B - minB) * 255 / (maxB - minB), 0, 255);
+            return Color.FromArgb(newR, newG, newB);
         }
     }
 }

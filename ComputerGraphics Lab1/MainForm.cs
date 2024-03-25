@@ -280,8 +280,8 @@ namespace ComputerGraphics_Lab1
                 { true, true, true },
                 { true, true, true }
             };
-            Filters filter = new OpeningFilter(structElem);
-            backgroundWorker1.RunWorkerAsync(filter);
+            Filters[] filters = new Filters[] { new ErosionFilter(structElem), new DilationFilter(structElem) };
+            backgroundWorker1.RunWorkerAsync(filters);
         }
 
         private void closingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -304,7 +304,9 @@ namespace ComputerGraphics_Lab1
                 { true, true, true },
                 { true, true, true }
             };
-            
+            Bitmap originalImage = image;
+            Filters[] filters = new Filters[] { new ErosionFilter(structElem), new DilationFilter(structElem), new SubtractFilter(originalImage) };
+            backgroundWorker1.RunWorkerAsync(filters);
         }
 
         private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
@@ -315,7 +317,9 @@ namespace ComputerGraphics_Lab1
                 { true, true, true },
                 { true, true, true }
             };
-            
+            Bitmap originalImage = image;
+            Filters[] filters = new Filters[] { new DilationFilter(structElem), new ErosionFilter(structElem), new SubtractFilter(originalImage) };
+            backgroundWorker1.RunWorkerAsync(filters);
         }
 
         private void gradientToolStripMenuItem_Click(object sender, EventArgs e)
@@ -326,7 +330,12 @@ namespace ComputerGraphics_Lab1
                 { true, true, true },
                 { true, true, true }
             };
-            
+            Bitmap originalImage = image;
+            Filters erosionFilter = new ErosionFilter(structElem);
+            Bitmap erosionImage = erosionFilter.processImage(originalImage, backgroundWorker1);
+
+            Filters[] filters = new Filters[] { new DilationFilter(structElem), new SubtractFilter(erosionImage) };
+            backgroundWorker1.RunWorkerAsync(filters);
         }
     }
 }

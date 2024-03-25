@@ -21,7 +21,7 @@ namespace ComputerGraphics_Lab1
             return value;
         }
 
-        public Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        /*public Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int i = 0; i < sourceImage.Width; i++)
@@ -29,6 +29,24 @@ namespace ComputerGraphics_Lab1
                 worker.ReportProgress((int)((float)i / resultImage.Width * 100));
                 if (worker.CancellationPending)
                     return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+            return resultImage;
+        }*/
+        public Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                if (worker.CancellationPending)
+                    return null;
+                if (worker.IsBusy)
+                {
+                    worker.ReportProgress((int)((float)i / resultImage.Width * 100));
+                }
                 for (int j = 0; j < sourceImage.Height; j++)
                 {
                     resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));

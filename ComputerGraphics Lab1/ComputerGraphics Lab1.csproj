@@ -82,7 +82,7 @@
     <Compile Include="SepiaFilter.cs" />
     <Compile Include="SharpenFilter.cs" />
     <Compile Include="SobelFilter.cs" />
-    <Compile Include="SubstractionFilter.cs" />
+    <Compile Include="SubstractFilter.cs" />
     <Compile Include="TopHatFilter.cs" />
     <Compile Include="TranspositionFilter.cs" />
     <Compile Include="WavesFilter.cs" />
